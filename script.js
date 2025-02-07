@@ -10,7 +10,7 @@ const PORT = 80;
 app.use(bodyParser.json());
 
 // ✅ Serve static files from /var/www/html
-app.use(express.static("/home/ubuntu/UC1"));
+app.use(express.static("/home/ubuntu/UC2"));
 
 // Database configuration
 const dbConfig = {
