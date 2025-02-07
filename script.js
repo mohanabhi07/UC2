@@ -63,12 +63,12 @@ connection.connect((err) => {
 
 // ✅ Serve login page for GET /
 app.get("/", (req, res) => {
-    res.sendFile(path.join("/home/Ubuntu/UC1", "index.html"));
+    res.sendFile(path.join("/home/Ubuntu/UC2", "index.html"));
 });
 
 // ✅ Serve login page for GET /login
 app.get("/login", (req, res) => {
-    res.sendFile(path.join("/home/ubuntu/UC1", "index.html"));
+    res.sendFile(path.join("/home/ubuntu/UC2", "index.html"));
 });
 
 // ✅ Handle login data submission (POST request)
