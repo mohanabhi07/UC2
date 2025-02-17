@@ -11,7 +11,7 @@ const PORT = 80;
 app.use(bodyParser.json());
 
 // ✅ Serve static files from /var/www/html
-app.use(express.static("/home/ubuntu/UC1"));
+app.use(express.static("/home/ubuntu/UC2"));
 
 // Database configuration
 const dbConfig = {
@@ -64,12 +64,12 @@ connection.connect((err) => {
 
 // ✅ Serve login page for GET /
 app.get("/", (req, res) => {
-    res.sendFile(path.join("/home/Ubuntu/UC1", "index.html"));
+    res.sendFile(path.join("/home/Ubuntu/UC2", "index.html"));
 });
 
 // ✅ Serve login page for GET /login
 app.get("/login", (req, res) => {
-    res.sendFile(path.join("/home/ubuntu/UC1", "index.html"));
+    res.sendFile(path.join("/home/ubuntu/UC2", "index.html"));
 });
 
 // ✅ Handle login data submission (POST request)
