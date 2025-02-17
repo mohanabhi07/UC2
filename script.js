@@ -16,8 +16,8 @@ app.use(express.static("/home/ubuntu/UC1"));
 // Database configuration
 const dbConfig = {
     host: "", // Replace with your RDS endpoint
-    user: , // Replace with your RDS username
-    password: , // Replace with your RDS password
+    user: "", // Replace with your RDS username
+    password: "", // Replace with your RDS password
     database: "" // Database name
 };
 
